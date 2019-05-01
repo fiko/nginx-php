@@ -1,6 +1,6 @@
 # Nginx & PHP
 
-This Nginx image includes PHP 7.2, and base on Ubuntu 18.04
+This Nginx image includes PHP 7.2 for Docker, base on Ubuntu 18.04
 
 ## Installation
 
