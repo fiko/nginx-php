@@ -30,6 +30,7 @@ RUN cd /; \
 	mkdir /run/php; \
 	chmod +x $DCMD; \
 	echo '#!/bin/bash' >> $DCMD; \
+	echo 'cd /' >> $DCMD; \
 	echo './etc/init.d/nginx start' >> $DCMD; \
 	echo './etc/init.d/php7.2-fpm start' >> $DCMD; \
 	echo 'echo $TIMEZONE > /etc/timezone' >> $DCMD; \
