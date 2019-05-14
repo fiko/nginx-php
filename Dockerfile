@@ -13,7 +13,15 @@ RUN apt-get install -y php7.2 \
 	php7.2-mysql \
 	php7.2-cli \
 	php7.2-common \
-	php7.2-json
+	php7.2-json \
+	php7.2-curl \
+	php7.2-gd \
+	php7.2-intl \
+	php7.2-mbstring \
+	php7.2-xsl \
+	php7.2-zip \
+	php-gettext \
+	php-imagick
 
 # move to root directory
 RUN cd /; \
@@ -36,6 +44,9 @@ RUN service php7.2-fpm start;
 COPY ./nginx.default.conf /etc/nginx/conf.d/default.conf
 # Copying default PHP Pages
 COPY ./public_html/ /var/www/html/
+
+# Move to a directory
+WORKDIR /var/www/html
 
 EXPOSE 80 443
 
