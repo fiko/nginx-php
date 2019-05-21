@@ -4,6 +4,11 @@ LABEL maintainer="Fiko Borizqy <fiko@dr.com>"
 # This file will be executed
 ENV DCMD "/usr/sbin/docker-fiko-nginx-php.sh"
 
+# Installing Software Properties Common
+# and adding universe repository
+RUN apt-get update && apt-get install -y software-properties-common; \
+	add-apt-repository universe
+
 # Installing nginx
 RUN apt-get update && apt-get install -y nginx
 
@@ -23,6 +28,10 @@ RUN apt-get update && apt-get install -y php7.2 \
 	php-gettext \
 	php-imagick
 
+# Installing certbot
+RUN add-apt-repository ppa:certbot/certbot; \
+	apt-get update && apt-get install -y certbot python-certbot-nginx
+
 # move to root directory
 RUN cd /; \
 	# creating $DCMD file
@@ -39,7 +48,7 @@ RUN cd /; \
 	echo '& tail -f /var/log/nginx/error.log -n 0' >> $DCMD;
 
 # run PHP for the first time
-RUN service php7.2-fpm start;
+RUN service php7.2-fpm start
 
 # Copying default Nginx configuration
 COPY ./nginx.default.conf /etc/nginx/conf.d/default.conf
